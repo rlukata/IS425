@@ -94,6 +94,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <SplashScreen Include="facts-9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </SplashScreen>
     <Content Include="randomFacts.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

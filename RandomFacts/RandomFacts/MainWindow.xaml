@@ -7,12 +7,19 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="Random Facts!" Height="350" Width="522.775" IsTabStop="False" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF2EFF00">
-        <Button x:Name="randomFactButton" Content="Click for a random fact!" Height="40" VerticalAlignment="Top" 
-                Click="randomFactButton1_Click" Background="#FF2EFF00" Foreground="#FF5D00FF" Margin="147,10,148,0" 
-                RenderTransformOrigin="0.494,1.031" FontSize="16" FontFamily="Comic Sans MS"/>
-        <ScrollViewer x:Name="Scroller" Height="258" Margin="0,54,0,5" VerticalScrollBarVisibility = "Auto">
-            <TextBlock x:Name="randomFactTextBlock" HorizontalAlignment="Left" Height ="auto" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="24" 
+    <Grid>
+        <Menu Background="#FF2EFF00" FontFamily="Showcard Gothic" FontSize="20" FontWeight="Bold">
+            <MenuItem x:Name="MenuItemFile" Header="_File">
+                <MenuItem x:Name="MenuItemOpen" Header="_Open" Click="MenuItemOpen_Click"/>
+                <MenuItem x:Name="MenuItemReset" Header="Reset" Click="MenuItemReset_Click"/>
+                <Separator HorizontalAlignment="Left" Height="2" Width="110"/>
+                <MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemClickMe" Header="_Click me!" Click="MenuItemClickMe_Click"/>
+        </Menu>
+        <ScrollViewer x:Name="Scroller" Margin="1,46,-1,7.667" VerticalScrollBarVisibility = "Auto">
+            <TextBlock x:Name="randomFactTextBlock" HorizontalAlignment="Left" Height ="auto" TextWrapping="Wrap" 
+                       VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="24" 
                        Background="#FF2EFF00" Foreground="#FF5D00FF"/>
         </ScrollViewer>
     </Grid>
