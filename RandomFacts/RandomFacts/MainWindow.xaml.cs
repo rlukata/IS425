@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
@@ -7,24 +10,30 @@ namespace RandomFacts
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    partial class MainWindow : Window
     {
         /**
          * Variable declaration
          */
         MyFunctions myFunction = new MyFunctions();
-        String[] myContent;
-        String myResult;
+        List<string> myContent;
+
+        //static variable that holds the path of the initial data
+        internal static string myInitFile = @"randomFacts.txt";
+
+        // static variable that holds the path of edited files
+        internal static string myTempFile = @"editedFacts.txt";
 
         //holder that contains error message info for try catch block across all classes
-        public static String[] holder = { "something went wrong", "load another text file", "the file is empty" };
-
+        internal static List<string> holder = 
+            new List<string> { "something went wrong", "load another text file", "the file is empty" };
+        
         public MainWindow()
         {
             InitializeComponent();
 
             //this makes the splash screen stay on for 2 seconds
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
         }
 
         /**
@@ -37,8 +46,9 @@ namespace RandomFacts
         {
             try
             {
-                myContent = myFunction.SaveContentFromData(@"randomFacts.txt");
-            }catch
+                myContent = myFunction.SaveContentFromData(myInitFile);
+            }
+            catch
             {
                 myContent = holder;
             }
@@ -46,56 +56,96 @@ namespace RandomFacts
             this.MenuItemReset_Click(sender, e);
         }
 
+        /**
+         * Events triggered by buttons 
+         */
+        //open button
         private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
         {
             myContent = myFunction.OpenTxtFile();
             this.MenuItemClickMe_Click(sender, e);
         }
 
+        //reset button
         private void MenuItemReset_Click(object sender, RoutedEventArgs e)
         {
-            myResult = myFunction.LoadContentIntoFunction(myContent);
-            randomFactTextBlock.Text = myResult;
+            myContent = myFunction.SaveContentFromData(myInitFile);
+            randomFactTextBlock.Text = myFunction.LoadContentIntoFunction(myContent);
         }
 
+        //exit button
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        //click_me button
         private void MenuItemClickMe_Click(object sender, RoutedEventArgs e)
         {
-            myResult = myFunction.LoadContentIntoFunction(myContent);
-            randomFactTextBlock.Text = myResult;
+            randomFactTextBlock.Text = myFunction.LoadContentIntoFunction(myContent);
+        }
+        
+        //edit button
+        private void MenuItemEdit_Click(object sender, RoutedEventArgs e)
+        {
+            myContent = myFunction.SaveAndEditContentIntoFile(myContent);
+            this.MenuItemClickMe_Click(sender, e);
         }
     }
 
 
     /**
-     * New partial class that creates several public functions for the
+     * Partial class that creates several public functions for the
      * GUI to use and pass data around
      */
-    public partial class MyFunctions
+    partial class MyFunctions
     {
         /**
          * The function stores the data in an array of strings
          * it returns the array of data to be used by the program
          */
-        public string[] SaveContentFromData(string myData)
+        internal List<string> SaveContentFromData(string myData)
         {
-           string[] lines = File.ReadAllLines(myData);
-           return lines;
+            List<string> lines = new List<string> { };
+            lines.AddRange(File.ReadAllLines(myData));
+            return lines;
         }
 
+        /**
+         * The function takes a list string of data, stores it in a new file, then it calls
+         * the EditContentOfFile function to open Notepad and edit contents
+         */
+        internal List<string> SaveAndEditContentIntoFile(List<string> myData)
+        {
+            File.WriteAllLines(MainWindow.myTempFile, myData);
+            EditContentOfFile(MainWindow.myTempFile);
+            return SaveContentFromData(MainWindow.myTempFile);
+        }
+
+        /**
+         * Process that calls process class to start and close notepad on .txt files 
+         */
+        void EditContentOfFile(string myPath)
+        {
+            var process = new Process();
+            process.StartInfo = new ProcessStartInfo()
+            {
+                UseShellExecute = true,
+                FileName = myPath
+            };
+            process.Start();
+            process.WaitForExit();
+        }
+        
         /**
          * This function also keeps sorting through the array if it finds an empty string
          * it returns the string to be used by the GUI
          */
-        public string LoadContentIntoFunction(string[] myContent)
+        internal string LoadContentIntoFunction(List<string> myContent)
         {
             Random rand = new Random();
-            string myDataContent = myContent[rand.Next(myContent.Length)];
-            while (myDataContent == "") myDataContent = myContent[rand.Next(myContent.Length)];
+            string myDataContent = myContent[rand.Next(myContent.Count)];
+            while (myDataContent == "") myDataContent = myContent[rand.Next(myContent.Count)];
             return myDataContent;
         }
 
@@ -103,10 +153,10 @@ namespace RandomFacts
          * Function that opens a specific type of file
          * it's designed to only find and look for .txt files
          */
-        public string[] OpenTxtFile()
+        internal List<string> OpenTxtFile()
         {
             //Create string variable to return
-            string[] myContent = MainWindow.holder;
+            List<string> myContent = MainWindow.holder;
 
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -126,7 +176,8 @@ namespace RandomFacts
             }
 
             // Detect wether a file is empty by reviewing the first 4 lines
-            // Continue the program by adding a message
+            // Continue the program by replacing content for message found
+            // in variable holder
             try
             {
                 if (myContent[0] == "" && myContent[1] == "" && myContent[2] == "" && myContent[3] == "")
