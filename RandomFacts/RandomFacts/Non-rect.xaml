@@ -1,0 +1,72 @@
+﻿<Window x:Class="RandomFacts.Non_rect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        Title="Non_rect" Height="275.769" Width="434.765">
+    <Canvas Margin="0,0,-0.333,-3">
+        <Path Fill="Yellow" Stroke="Blue" Canvas.Left="264.448" Canvas.Top="86.563">
+            <Path.Data>
+                <CombinedGeometry GeometryCombineMode="Union">
+                    <CombinedGeometry.Geometry1>
+                        <CombinedGeometry GeometryCombineMode="Exclude">
+                            <CombinedGeometry.Geometry1>
+                                <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50"></EllipseGeometry>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <EllipseGeometry Center="50,50" RadiusX="40" RadiusY="40"></EllipseGeometry>
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </CombinedGeometry.Geometry1>
+                    <CombinedGeometry.Geometry2>
+                        <RectangleGeometry Rect="44,5 10,90">
+                            <RectangleGeometry.Transform>
+                                <RotateTransform Angle="45" CenterX="50" CenterY="50"></RotateTransform>
+                            </RectangleGeometry.Transform>
+                        </RectangleGeometry>
+                    </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+            </Path.Data>
+        </Path>
+        <Path Fill="Yellow" Stroke="Blue" Canvas.Left="48.773" Canvas.Top="88.783">
+            <Path.Data>
+                <CombinedGeometry GeometryCombineMode="Union">
+                    <CombinedGeometry.Geometry1>
+                        <RectangleGeometry Rect="0,0 100,100"></RectangleGeometry>
+                    </CombinedGeometry.Geometry1>
+                    <CombinedGeometry.Geometry2>
+                        <EllipseGeometry Center="85,50" RadiusX="65" RadiusY="35"></EllipseGeometry>
+                    </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+            </Path.Data>
+        </Path>
+        <TextBlock Canvas.Top="34" Canvas.Left="64" FontSize="25" FontWeight="Bold">
+            <TextBlock.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Yellow" Offset="0.0" />
+                    <GradientStop Color="Red" Offset="0.25" />
+                    <GradientStop Color="Blue" Offset="0.75" />
+                    <GradientStop Color="LimeGreen" Offset="1.0" />
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+            Non-Rectangular Window
+        </TextBlock>
+        <Button x:Name="CloseButton" RenderTransformOrigin="2.377,5.546" Canvas.Left="176"
+                Canvas.Top="221" Height="30" Width="74" Click="CloseButton_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Yellow" Offset="0.0" />
+                    <GradientStop Color="Red" Offset="0.25" />
+                    <GradientStop Color="Blue" Offset="0.75" />
+                    <GradientStop Color="LimeGreen" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            Close
+        </Button>
+    </Canvas>
+</Window>
