@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup>
+    <WapProjPath Condition="'$(WapProjPath)'==''">$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\</WapProjPath>
+  </PropertyGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
+  <PropertyGroup>
+    <ProjectGuid>8d9c7738-ef30-4ef0-a5f3-9c8d9970e966</ProjectGuid>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>RandomFactsUWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <EntryPointProjectUniqueName>..\RandomFacts\RandomFacts.csproj</EntryPointProjectUniqueName>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Users\Rami\Desktop\UWP\</AppxPackageDir>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="RandomFactsUWP_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Resources\BadgeLogo.scale-100.png" />
+    <Content Include="Resources\BadgeLogo.scale-125.png" />
+    <Content Include="Resources\BadgeLogo.scale-150.png" />
+    <Content Include="Resources\BadgeLogo.scale-200.png" />
+    <Content Include="Resources\BadgeLogo.scale-400.png" />
+    <Content Include="Resources\LargeTile.scale-100.png" />
+    <Content Include="Resources\LargeTile.scale-125.png" />
+    <Content Include="Resources\LargeTile.scale-150.png" />
+    <Content Include="Resources\LargeTile.scale-200.png" />
+    <Content Include="Resources\LargeTile.scale-400.png" />
+    <Content Include="Resources\randomFacts.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Resources\SmallTile.scale-100.png" />
+    <Content Include="Resources\SmallTile.scale-125.png" />
+    <Content Include="Resources\SmallTile.scale-150.png" />
+    <Content Include="Resources\SmallTile.scale-200.png" />
+    <Content Include="Resources\SmallTile.scale-400.png" />
+    <Content Include="Resources\SplashScreen.scale-100.png" />
+    <Content Include="Resources\SplashScreen.scale-125.png" />
+    <Content Include="Resources\SplashScreen.scale-150.png" />
+    <Content Include="Resources\SplashScreen.scale-200.png" />
+    <Content Include="Resources\SplashScreen.scale-400.png" />
+    <Content Include="Resources\Square150x150Logo.scale-100.png" />
+    <Content Include="Resources\Square150x150Logo.scale-125.png" />
+    <Content Include="Resources\Square150x150Logo.scale-150.png" />
+    <Content Include="Resources\Square150x150Logo.scale-200.png" />
+    <Content Include="Resources\Square150x150Logo.scale-400.png" />
+    <Content Include="Resources\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Resources\Square44x44Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Resources\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Resources\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Resources\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Resources\Square44x44Logo.scale-100.png" />
+    <Content Include="Resources\Square44x44Logo.scale-125.png" />
+    <Content Include="Resources\Square44x44Logo.scale-150.png" />
+    <Content Include="Resources\Square44x44Logo.scale-200.png" />
+    <Content Include="Resources\Square44x44Logo.scale-400.png" />
+    <Content Include="Resources\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Resources\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Resources\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Resources\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Resources\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Resources\StoreLogo.scale-100.png" />
+    <Content Include="Resources\StoreLogo.scale-125.png" />
+    <Content Include="Resources\StoreLogo.scale-150.png" />
+    <Content Include="Resources\StoreLogo.scale-200.png" />
+    <Content Include="Resources\StoreLogo.scale-400.png" />
+    <Content Include="Resources\Wide310x150Logo.scale-100.png" />
+    <Content Include="Resources\Wide310x150Logo.scale-125.png" />
+    <Content Include="Resources\Wide310x150Logo.scale-150.png" />
+    <Content Include="Resources\Wide310x150Logo.scale-200.png" />
+    <Content Include="Resources\Wide310x150Logo.scale-400.png" />
+    <Content Include="Square71x71Logo.scale-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RandomFacts\RandomFacts.csproj" />
+  </ItemGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+</Project>

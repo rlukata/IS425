@@ -17,21 +17,21 @@ namespace RandomFacts
          */
         private MyFunctions myFunction = new MyFunctions();
         private List<string> myContent;
-
-        //static variable that holds the path of the initial data
-        internal static string myInitFile = "randomFacts.txt";
-
+        
         // static variable that holds the path of edited files
-        internal static string myTempFile = "editedFacts.txt";
+        internal static string myTempFile;
 
         //holder that contains error message info for try catch block across all classes
         internal static List<string> holder =
             new List<string> { "something went wrong", "load another text file", "the file is empty" };
+        
+        //holder that contains reset message info
+        internal static List<string> reset =
+            new List<string> { "No file has been loaded", "Load another text file", "The file is empty" };
 
         public MainWindow()
         {
             InitializeComponent();
-
             //this makes the splash screen stay on for 2 seconds
             Thread.Sleep(2000);
         }
@@ -45,16 +45,7 @@ namespace RandomFacts
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                myContent = myFunction.SaveContentFromData(myInitFile);
-            }
-            catch
-            {
-                myContent = holder;
-            }
-
-            this.MenuItemReset_Click(sender, e);
+            myContent = reset;
         }
 
         /**
@@ -71,7 +62,8 @@ namespace RandomFacts
         //reset button
         private void MenuItemReset_Click(object sender, RoutedEventArgs e)
         {
-            myContent = myFunction.SaveContentFromData(myInitFile);
+            myContent.Clear();
+            myContent = reset;
             randomFactTextBlock.Text = myFunction.LoadContentIntoFunction(myContent);
         }
 
@@ -109,7 +101,7 @@ namespace RandomFacts
 
     partial class MyFunctions
     {
-        /**
+         /**
          * The function stores the data in an array of strings
          * it returns the array of data to be used by the program
          */
@@ -120,7 +112,7 @@ namespace RandomFacts
             lines.AddRange(File.ReadAllLines(myData));
             return lines;
         }
-
+        
         /**
          * The function takes a list string of data, stores it in a new file, then it calls
          * the EditContentOfFile function to open Notepad and edit contents
@@ -128,6 +120,7 @@ namespace RandomFacts
 
         internal List<string> SaveAndEditContentIntoFile(List<string> myData)
         {
+            SaveTxtFile();
             File.WriteAllLines(MainWindow.myTempFile, myData);
             EditContentOfFile(MainWindow.myTempFile);
             return SaveContentFromData(MainWindow.myTempFile);
@@ -177,7 +170,6 @@ namespace RandomFacts
             // Create OpenFileDialog
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
             {
-
                 // Set filter for file extension and default file extension
                 DefaultExt = ".txt",
                 Filter = "TXT Files (*.txt)|*.txt"
@@ -208,6 +200,32 @@ namespace RandomFacts
                 myContent = MainWindow.holder;
             }
             return myContent;
+        }
+
+        /**
+         * Function that saves a specific type of file
+         * it's designed to only save and show .txt files
+         */
+
+        internal void SaveTxtFile()
+        {
+            // Create SaveFileDialog
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                // Set filter for file extension and default file extension
+                DefaultExt = ".txt",
+                Filter = "TXT Files (*.txt)|*.txt"
+            };
+
+            // Display SaveFileDialog by calling ShowDialog method
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox
+            if (result == true)
+            {
+                // Open and read from document
+                MainWindow.myTempFile = dlg.FileName;
+            }
         }
     }
 }
